@@ -1148,6 +1148,278 @@
     .ap-chapter.active .ap-chapter-label { color: #f8d88b; }
     @media (max-width: 520px) { #audio-player { width: calc(100% - 28px); right: 14px; bottom: 14px; } }
 
+  
+    .ap-photo {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      object-fit: cover;
+      display: block;
+      border: 2px solid rgba(200,155,60,0.65);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.22);
+    }
+
+    #audio-player.minimized .ap-mini {
+      background-image: url("sam-audio-icon.png");
+      background-size: cover;
+      background-position: center;
+      color: transparent;
+      border: 2px solid rgba(200,155,60,0.75);
+    }
+
+    .package-selected-banner {
+      display: none;
+      margin: 18px auto 0;
+      padding: 14px 16px;
+      border-radius: 16px;
+      background: rgba(15,118,110,0.10);
+      border: 1px solid rgba(15,118,110,0.24);
+      color: #0f766e;
+      font-weight: 900;
+      text-align: center;
+      max-width: 720px;
+    }
+
+    .package-selected-banner.active { display: block; }
+
+    .pricing-option-card { cursor: pointer; }
+
+    .pricing-option-card.selected {
+      border-color: #0f766e !important;
+      background: linear-gradient(135deg, #ecfdf5 0%, #fffaf1 100%) !important;
+      box-shadow: 0 18px 38px rgba(15,118,110,0.18) !important;
+      transform: translateY(-2px);
+    }
+
+    .select-package-btn {
+      margin-top: 10px;
+      width: 100%;
+      border: none;
+      border-radius: 12px;
+      padding: 10px 12px;
+      background: #101828;
+      color: #ffffff;
+      font-weight: 900;
+      cursor: pointer;
+      transition: all 0.18s ease;
+      font-size: 13px;
+    }
+
+    .select-package-btn:hover {
+      background: #0f766e;
+      transform: translateY(-1px);
+    }
+
+    .pricing-option-card.selected .select-package-btn { background: #0f766e; }
+
+    .payment-selected-summary {
+      margin: 18px auto 20px;
+      max-width: 520px;
+      padding: 16px;
+      border-radius: 16px;
+      background: #ecfdf5;
+      border: 1px solid rgba(15,118,110,0.25);
+      color: #101828;
+      text-align: center;
+    }
+
+    .payment-selected-summary .selected-label {
+      font-size: 13px;
+      color: #667085;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .payment-selected-summary .selected-amount {
+      margin-top: 4px;
+      font-size: 34px;
+      color: #0f766e;
+      font-weight: 950;
+      letter-spacing: -0.05em;
+      line-height: 1;
+    }
+
+    .payment-selected-summary .selected-note {
+      margin-top: 6px;
+      font-size: 13px;
+      color: #667085;
+      font-weight: 700;
+    }
+
+  
+    /* Clean selectable package cards — no extra buttons */
+    .select-package-btn {
+      display: none !important;
+    }
+
+    .pricing-option-card {
+      cursor: pointer;
+      position: relative;
+      transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease, background 0.18s ease;
+    }
+
+    .pricing-option-card::after {
+      content: "Click to select";
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      padding: 5px 9px;
+      border-radius: 999px;
+      background: rgba(16, 24, 40, 0.06);
+      color: #667085;
+      font-size: 11px;
+      font-weight: 900;
+      opacity: 0;
+      transform: translateY(-3px);
+      transition: opacity 0.18s ease, transform 0.18s ease;
+    }
+
+    .pricing-option-card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(15, 118, 110, 0.45) !important;
+      box-shadow: 0 14px 30px rgba(15, 118, 110, 0.10) !important;
+    }
+
+    .pricing-option-card:hover::after {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .pricing-option-card.selected {
+      border-color: #0f766e !important;
+      background: linear-gradient(135deg, #ecfdf5 0%, #fffaf1 100%) !important;
+      box-shadow: 0 18px 38px rgba(15, 118, 110, 0.18) !important;
+      transform: translateY(-2px);
+    }
+
+    .pricing-option-card.selected::after {
+      content: "Selected";
+      opacity: 1;
+      transform: translateY(0);
+      background: #0f766e;
+      color: #ffffff;
+    }
+
+    .payment-price-row {
+      transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease, background 0.18s ease;
+    }
+
+    .payment-price-row.selected {
+      border: 2px solid #0f766e !important;
+      background: linear-gradient(135deg, #ecfdf5 0%, #fffaf1 100%) !important;
+      box-shadow: 0 16px 34px rgba(15, 118, 110, 0.14) !important;
+      transform: translateY(-2px);
+    }
+
+    .payment-price-row.selected .price {
+      color: #0f766e !important;
+    }
+
+    .payment-entry-instruction {
+      max-width: 560px;
+      margin: 0 auto 16px;
+      padding: 14px 16px;
+      border-radius: 16px;
+      background: rgba(180, 83, 9, 0.10);
+      color: #92400e;
+      border: 1px solid rgba(180, 83, 9, 0.20);
+      font-size: 14px;
+      line-height: 1.45;
+      font-weight: 900;
+      text-align: center;
+    }
+
+    .payment-entry-instruction strong {
+      color: #0f766e;
+      font-size: 18px;
+    }
+
+  
+    /* Final package card selection polish */
+    .pricing-option-card {
+      padding-right: 15px !important;
+      padding-bottom: 44px !important;
+      min-height: 112px;
+    }
+
+    .pricing-option-card::after {
+      top: auto !important;
+      right: 14px !important;
+      bottom: 12px !important;
+      opacity: 1 !important;
+      transform: none !important;
+      background: rgba(16, 24, 40, 0.06) !important;
+      color: #667085 !important;
+    }
+
+    .pricing-option-card:hover::after {
+      background: rgba(15,118,110,0.10) !important;
+      color: #0f766e !important;
+    }
+
+    .pricing-option-card.selected::after {
+      content: "Selected" !important;
+      background: #0f766e !important;
+      color: #ffffff !important;
+    }
+
+    .pricing-option-card.featured:not(.selected) {
+      border: 1px solid #f0d597 !important;
+      background: #fffaf1 !important;
+      box-shadow: none !important;
+      transform: none !important;
+    }
+
+    .pricing-option-card.featured:not(.selected):hover {
+      transform: translateY(-2px) !important;
+      border-color: rgba(15, 118, 110, 0.45) !important;
+      box-shadow: 0 14px 30px rgba(15, 118, 110, 0.10) !important;
+    }
+
+    .pricing-option-card.selected,
+    .pricing-option-card.featured.selected {
+      border: 2px solid #0f766e !important;
+      background: linear-gradient(135deg, #ecfdf5 0%, #fffaf1 100%) !important;
+      box-shadow: 0 18px 38px rgba(15, 118, 110, 0.18) !important;
+      transform: translateY(-2px) !important;
+    }
+
+  
+    /* Final layout polish */
+    .section.tight-section {
+      max-width: 1180px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .section.tight-section .grid-3 {
+      max-width: 980px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .section.tight-section .section-intro {
+      margin-left: auto;
+      margin-right: auto;
+      text-align: center;
+    }
+
+    .section.tight-section h2 {
+      text-align: center;
+    }
+
+    .paypal-center-wrap {
+      max-width: 560px !important;
+      margin: 0 auto !important;
+      text-align: center !important;
+    }
+
+    #paypal-container-36WAQDBTSMF2N {
+      max-width: 560px !important;
+      margin: 0 auto !important;
+    }
+
   </style>
 
   <!-- Microsoft Clarity Tracking -->
@@ -1167,10 +1439,10 @@
 <body>
 
   <div id="audio-player">
-    <div class="ap-mini" onclick="toggleMinimize()">▶</div>
+    <div class="ap-mini" onclick="toggleMinimize()">Sam</div>
     <div class="ap-full">
       <div class="ap-header">
-        <div class="ap-icon">▶</div>
+        <div class="ap-icon"><img src="sam-audio-icon.png" alt="Sam" class="ap-photo"></div>
         <div class="ap-title">
           <h4>Sam’s Proposal Walkthrough</h4>
           <p>Section-wise audio guide</p>
@@ -1685,19 +1957,21 @@
             <div class="main-price">$999</div>
             <div class="note">For one book setup</div>
 
-            <div style="margin-top:20px; display:grid; gap:10px;">
-              <div class="pricing-option-card">
+            <div style="margin-top:20px; display:grid; gap:10px;" id="packageOptions">
+              <div class="pricing-option-card" data-option="1 Book - $999 - Save $501" data-amount="$999" onclick="selectPackageOption('1 Book - $999 - Save $501')">
                 <strong>1 Book:</strong> <span class="price-green">$999</span> <span class="savings-pill">Save $501</span>
                 <div style="font-size:13px; color:#667085; margin-top:4px;">Standard value: $1,500</div>
               </div>
-              <div class="pricing-option-card">
+              <div class="pricing-option-card" data-option="2 Books - $1,699 - Save $1,301" data-amount="$1,699" onclick="selectPackageOption('2 Books - $1,699 - Save $1,301')">
                 <strong>2 Books:</strong> <span class="price-green">$1,699</span> <span class="savings-pill">Save $1,301</span>
                 <div style="font-size:13px; color:#667085; margin-top:4px;">Standard value: $3,000</div>
               </div>
-              <div class="pricing-option-card featured">
+              <div class="pricing-option-card" data-option="3 Books - $1,999 - Save $2,501" data-amount="$1,999" onclick="selectPackageOption('3 Books - $1,999 - Save $2,501')">
                 <strong>3 Books:</strong> <span class="price-green">$1,999</span> <span class="savings-pill">Save $2,501</span> <span class="best-value-pill">Best Savings</span>
                 <div style="font-size:13px; color:#667085; margin-top:4px;">Standard value: $4,500</div>
               </div>
+            </div>
+            <div class="package-selected-banner" id="packageSelectedBanner">Selected: <span id="selectedPackageText">None</span></div>
             </div>
           </div>
 
@@ -1706,7 +1980,7 @@
       </div>
     </section>
 
-    <section class="section">
+    <section class="section tight-section">
       <h2>Why this is a smart investment</h2>
       <p class="section-intro">
         For most authors, the book is not just a file. It is a message, a brand asset, a credibility tool,
@@ -1779,13 +2053,13 @@
       <div class="pay-section" id="paypalPaymentSection">
         <div class="payment-trust-badge">Secure checkout through PayPal</div>
         <h3>Complete your payment securely</h3>
-        <p>Your selection has been received. Please enter the matching amount from your selected option and complete checkout securely.</p>
+        <p>Your selection has been received. Your selected package is highlighted below. Please enter the same amount in PayPal and complete checkout securely.</p>
 
         <div class="payment-card">
           <div class="payment-offer-title">Extensive Publishing and Book Legal Setup</div>
 
-          <div class="payment-price-list">
-            <div class="payment-price-row featured">
+          <div class="payment-price-list" id="paymentPriceList">
+            <div class="payment-price-row selected" data-payment-option="1 Book - $999 - Save $501">
               <div>
                 <span class="label">1 Book</span>
                 <span class="old">Standard $1,499</span>
@@ -1793,7 +2067,7 @@
               <div class="price">$999</div>
             </div>
 
-            <div class="payment-price-row">
+            <div class="payment-price-row" data-payment-option="2 Books - $1,699 - Save $1,301">
               <div>
                 <span class="label">2 Books</span>
                 <span class="old">Standard $2,999</span>
@@ -1801,7 +2075,7 @@
               <div class="price">$1,699</div>
             </div>
 
-            <div class="payment-price-row">
+            <div class="payment-price-row" data-payment-option="3 Books - $1,999 - Save $2,501">
               <div>
                 <span class="label">3 Books</span>
                 <span class="old">Standard $4,499</span>
@@ -1811,6 +2085,19 @@
           </div>
 
           <div class="payment-urgency">Memorial Day pricing is reserved for approved proposal viewers.</div>
+
+          <div class="payment-selected-summary" id="paymentSelectedSummary">
+            <div class="selected-label">Selected Package</div>
+            <div class="selected-amount" id="paymentSelectedAmount">$999</div>
+            <div class="selected-note" id="paymentSelectedNote">1 Book - $999 - Save $501</div>
+          </div>
+
+          <div class="payment-entry-instruction checkout-first-note" id="paymentEntryInstruction">Please enter <strong>$999</strong> in the PayPal amount box below, then use the Checkout button below for the cleanest payment flow.</div>
+
+          
+          <div style="max-width:560px;margin:0 auto 12px;padding:12px 14px;border-radius:14px;background:#f8fafc;border:1px solid #e4e7ec;color:#101828;font-size:14px;font-weight:800;text-align:center;">
+            Recommended: use <span style="color:#0f766e;">Checkout</span> after entering your selected amount.
+          </div>
 
           <div class="paypal-center-wrap">
             <div id="paypal-container-36WAQDBTSMF2N"></div>
@@ -1927,6 +2214,10 @@
           if (selectedOption.includes("quick call")) {
             window.location.href = "https://calendar.app.google/R81uDUsAUoQ3LM3A7";
             return;
+          }
+
+          if (window.updatePaymentSelection && selectedOption) {
+            window.updatePaymentSelection(selectedOption);
           }
 
           const paymentSection = document.getElementById("paypalPaymentSection");
@@ -2076,6 +2367,100 @@
     window.toggleChapters = toggleChapters;
     window.toggleMinimize = toggleMinimize;
     window.jumpToChapter = jumpToChapter;
+  </script>
+
+
+  <script>
+    const packageDetails = {
+      "1 Book - $999 - Save $501": { amount: "$999", label: "1 Book - $999 - Save $501" },
+      "2 Books - $1,699 - Save $1,301": { amount: "$1,699", label: "2 Books - $1,699 - Save $1,301" },
+      "3 Books - $1,999 - Save $2,501": { amount: "$1,999", label: "3 Books - $1,999 - Save $2,501" }
+    };
+
+    function selectPackageOption(optionValue) {
+      const dropdown = document.getElementById("approvalChoice");
+      if (dropdown) dropdown.value = optionValue;
+
+      const cards = document.querySelectorAll(".pricing-option-card");
+      cards.forEach(card => {
+        card.classList.remove("selected");
+      });
+      cards.forEach(card => {
+        if (card.dataset.option === optionValue) {
+          card.classList.add("selected");
+        }
+      });
+
+      const banner = document.getElementById("packageSelectedBanner");
+      const bannerText = document.getElementById("selectedPackageText");
+      if (banner && bannerText) {
+        banner.classList.add("active");
+        bannerText.textContent = optionValue;
+      }
+
+      updatePaymentSelection(optionValue);
+
+      const form = document.getElementById("approvalForm");
+      if (form && document.activeElement && document.activeElement.closest && document.activeElement.closest(".pricing-option-card")) {
+        setTimeout(() => form.scrollIntoView({ behavior: "smooth", block: "center" }), 150);
+      }
+    }
+
+    function updatePaymentSelection(optionValue) {
+      const details = packageDetails[optionValue];
+      if (!details) return;
+
+      const amountEl = document.getElementById("paymentSelectedAmount");
+      const noteEl = document.getElementById("paymentSelectedNote");
+      const instructionEl = document.getElementById("paymentEntryInstruction");
+
+      if (amountEl) amountEl.textContent = details.amount;
+      if (noteEl) noteEl.textContent = details.label;
+      if (instructionEl) {
+        instructionEl.innerHTML = `Please enter <strong>${details.amount}</strong> in the PayPal amount box below, then use the Checkout button below for the cleanest payment flow.`;
+      }
+
+      document.querySelectorAll(".payment-price-row").forEach(row => {
+        row.classList.toggle("selected", row.dataset.paymentOption === optionValue);
+      });
+    }
+
+    document.addEventListener("DOMContentLoaded", function() {
+      const dropdown = document.getElementById("approvalChoice");
+      if (dropdown) {
+        dropdown.addEventListener("change", function() {
+          const optionValue = dropdown.value;
+          if (packageDetails[optionValue]) {
+            document.querySelectorAll(".pricing-option-card").forEach(card => {
+              card.classList.toggle("selected", card.dataset.option === optionValue);
+            });
+
+            const banner = document.getElementById("packageSelectedBanner");
+            const bannerText = document.getElementById("selectedPackageText");
+            if (banner && bannerText) {
+              banner.classList.add("active");
+              bannerText.textContent = optionValue;
+            }
+
+            updatePaymentSelection(optionValue);
+          }
+        });
+      }
+});
+
+    window.selectPackageOption = selectPackageOption;
+    window.updatePaymentSelection = updatePaymentSelection;
+  </script>
+
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      if (window.selectPackageOption && document.getElementById("packageOptions")) {
+        setTimeout(function() {
+          selectPackageOption("1 Book - $999 - Save $501");
+        }, 120);
+      }
+    });
   </script>
 
 </body>
