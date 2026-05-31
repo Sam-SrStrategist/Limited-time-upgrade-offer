@@ -1095,6 +1095,59 @@
       max-width: 540px !important;
     }
 
+  
+    /* Section-wise Sam audio walkthrough */
+    #audio-player {
+      position: fixed;
+      bottom: 22px;
+      right: 22px;
+      z-index: 9000;
+      width: 360px;
+      max-width: calc(100vw - 32px);
+      border-radius: 18px;
+      background: #101828;
+      color: #ffffff;
+      border: 1px solid rgba(200,155,60,0.42);
+      box-shadow: 0 18px 60px rgba(16,24,40,0.30);
+      transform: translateY(120%);
+      transition: transform 0.45s cubic-bezier(0.16,1,0.3,1);
+      overflow: hidden;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+    #audio-player.visible { transform: translateY(0); }
+    #audio-player.minimized { width: 58px; height: 58px; border-radius: 50%; cursor: pointer; }
+    #audio-player.minimized .ap-full { opacity: 0; pointer-events: none; height: 0; overflow: hidden; }
+    #audio-player.minimized .ap-mini { display: flex; }
+    .ap-mini { display: none; width: 58px; height: 58px; align-items: center; justify-content: center; background: #c89b3c; color: #101828; font-size: 18px; font-weight: 900; }
+    .ap-header { display: flex; align-items: center; gap: 12px; padding: 14px 16px; border-bottom: 1px solid rgba(255,255,255,0.10); background: linear-gradient(135deg, rgba(200,155,60,0.16), rgba(255,255,255,0.02)); }
+    .ap-icon { width: 38px; height: 38px; border-radius: 12px; background: rgba(200,155,60,0.18); color: #f8d88b; display: flex; align-items: center; justify-content: center; font-size: 13px; flex-shrink: 0; font-weight: 900; }
+    .ap-title { flex: 1; min-width: 0; }
+    .ap-title h4 { font-size: 14px; font-weight: 800; color: #ffffff; margin: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; line-height: 1.2; }
+    .ap-title p { font-size: 12px; color: rgba(255,255,255,0.62); margin: 2px 0 0; line-height: 1.2; }
+    .ap-minimize { width: 30px; height: 30px; border-radius: 8px; background: transparent; border: 1px solid rgba(255,255,255,0.16); color: rgba(255,255,255,0.72); font-size: 16px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.18s; flex-shrink: 0; }
+    .ap-minimize:hover { background: rgba(255,255,255,0.08); color: #ffffff; }
+    .ap-controls { padding: 13px 16px; display: flex; align-items: center; gap: 12px; }
+    .ap-play-btn { width: 42px; height: 42px; border-radius: 50%; background: #c89b3c; color: #101828; border: none; cursor: pointer; flex-shrink: 0; display: flex; align-items: center; justify-content: center; transition: all 0.18s; }
+    .ap-play-btn:hover { background: #e1b85d; transform: scale(1.04); }
+    .ap-play-btn svg { width: 18px; height: 18px; fill: currentColor; }
+    .ap-progress-wrap { flex: 1; display: flex; flex-direction: column; gap: 5px; min-width: 0; }
+    .ap-progress-bar { width: 100%; height: 6px; border-radius: 999px; background: rgba(255,255,255,0.12); cursor: pointer; position: relative; overflow: hidden; }
+    .ap-progress-fill { position: absolute; left: 0; top: 0; bottom: 0; background: #c89b3c; border-radius: 999px; width: 0%; }
+    .ap-time { display: flex; justify-content: space-between; font-size: 11px; color: rgba(255,255,255,0.55); font-family: Arial, Helvetica, sans-serif; }
+    .ap-chapters-toggle { width: 100%; padding: 9px 16px; background: rgba(255,255,255,0.03); border: none; border-top: 1px solid rgba(255,255,255,0.10); font-family: Arial, Helvetica, sans-serif; font-size: 12px; font-weight: 800; color: #f8d88b; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 6px; }
+    .ap-chapters { max-height: 0; overflow: hidden; transition: max-height 0.35s ease; }
+    .ap-chapters.open { max-height: 52vh; border-top: 1px solid rgba(255,255,255,0.10); overflow-y: auto; }
+    .ap-chapters-list { padding: 8px 0; }
+    .ap-chapter { display: flex; align-items: center; gap: 10px; padding: 9px 16px; cursor: pointer; transition: background 0.15s; border-left: 3px solid transparent; }
+    .ap-chapter:hover { background: rgba(200,155,60,0.10); }
+    .ap-chapter.active { background: rgba(200,155,60,0.13); border-left-color: #c89b3c; }
+    .ap-chapter-time { font-size: 11px; color: rgba(255,255,255,0.52); min-width: 42px; flex-shrink: 0; }
+    .ap-chapter-dot { width: 7px; height: 7px; border-radius: 50%; background: rgba(255,255,255,0.18); flex-shrink: 0; }
+    .ap-chapter.active .ap-chapter-dot { background: #c89b3c; }
+    .ap-chapter-label { font-size: 12px; color: rgba(255,255,255,0.72); font-weight: 700; line-height: 1.25; }
+    .ap-chapter.active .ap-chapter-label { color: #f8d88b; }
+    @media (max-width: 520px) { #audio-player { width: calc(100% - 28px); right: 14px; bottom: 14px; } }
+
   </style>
 
   <!-- Microsoft Clarity Tracking -->
@@ -1112,6 +1165,40 @@
 
 </head>
 <body>
+
+  <div id="audio-player">
+    <div class="ap-mini" onclick="toggleMinimize()">▶</div>
+    <div class="ap-full">
+      <div class="ap-header">
+        <div class="ap-icon">▶</div>
+        <div class="ap-title">
+          <h4>Sam’s Proposal Walkthrough</h4>
+          <p>Section-wise audio guide</p>
+        </div>
+        <button class="ap-minimize" onclick="toggleMinimize()" title="Minimize">−</button>
+      </div>
+      <div class="ap-controls">
+        <button class="ap-play-btn" onclick="togglePlay()" aria-label="Play or pause audio">
+          <svg id="playIcon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+          <svg id="pauseIcon" viewBox="0 0 24 24" style="display:none"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+        </button>
+        <div class="ap-progress-wrap">
+          <div class="ap-progress-bar" id="apProgressBar" onclick="seekAudio(event)">
+            <div class="ap-progress-fill" id="apProgressFill"></div>
+          </div>
+          <div class="ap-time"><span id="apCurrentTime">0:00</span><span id="apDuration">0:00</span></div>
+        </div>
+      </div>
+      <button class="ap-chapters-toggle" onclick="toggleChapters()"><span id="chToggleText">▾ Show All Sections</span></button>
+      <div class="ap-chapters" id="apChapters"><div class="ap-chapters-list" id="chaptersList"></div></div>
+    </div>
+  </div>
+  <audio id="narrationAudio" preload="auto">
+    <source src="walkthrough.mp3" type="audio/mpeg">
+    <source src="./walkthrough.mp3" type="audio/mpeg">
+    <source src="audio/walkthrough.mp3" type="audio/mpeg">
+  </audio>
+
 
   <div class="lead-gate" id="leadGate">
     <div class="lead-card">
@@ -1809,6 +1896,9 @@
             document.getElementById("leadGate").classList.add("hidden");
             document.getElementById("proposalContent").classList.remove("locked");
             window.scrollTo({ top: 0, behavior: "smooth" });
+            if (window.startWalkthroughAudio) {
+              window.startWalkthroughAudio();
+            }
           }, 650);
         } catch (error) {
           showMessage(messageBox, "error", error.message || "Something went wrong. Please try again.");
@@ -1863,6 +1953,129 @@
         }).render("#paypal-container-36WAQDBTSMF2N");
       }
     });
+  </script>
+
+
+  <script>
+    const narrationAudio = document.getElementById("narrationAudio");
+    const audioPlayer = document.getElementById("audio-player");
+    const playIcon = document.getElementById("playIcon");
+    const pauseIcon = document.getElementById("pauseIcon");
+    const progressFill = document.getElementById("apProgressFill");
+    const currentTimeEl = document.getElementById("apCurrentTime");
+    const durationEl = document.getElementById("apDuration");
+    const chaptersEl = document.getElementById("apChapters");
+    const chaptersList = document.getElementById("chaptersList");
+    const chToggleText = document.getElementById("chToggleText");
+
+    const audioChapters = [
+      { time: 0, label: "Welcome & Setup", section: ".hero" },
+      { time: 35, label: "The Big Question", section: ".hero" },
+      { time: 70, label: "What You Have vs. Unlock", section: "#pricing" },
+      { time: 110, label: "Why Doing It Now Matters", section: "#pricing" },
+      { time: 160, label: "Author Upgrade Options", section: "#pricing" },
+      { time: 195, label: "Next Step", section: "#approvalForm" }
+    ];
+
+    function formatTime(seconds) {
+      if (!isFinite(seconds)) return "0:00";
+      const mins = Math.floor(seconds / 60);
+      const secs = Math.floor(seconds % 60).toString().padStart(2, "0");
+      return `${mins}:${secs}`;
+    }
+
+    function initChapters() {
+      if (!chaptersList) return;
+      chaptersList.innerHTML = audioChapters.map((chapter, index) => `
+        <div class="ap-chapter" data-index="${index}" onclick="jumpToChapter(${index})">
+          <span class="ap-chapter-time">${formatTime(chapter.time)}</span>
+          <span class="ap-chapter-dot"></span>
+          <span class="ap-chapter-label">${chapter.label}</span>
+        </div>
+      `).join("");
+    }
+
+    function updateActiveChapter() {
+      if (!narrationAudio || !chaptersList) return;
+      let activeIndex = 0;
+      for (let i = 0; i < audioChapters.length; i++) {
+        if (narrationAudio.currentTime >= audioChapters[i].time) activeIndex = i;
+      }
+      chaptersList.querySelectorAll(".ap-chapter").forEach((el, index) => {
+        el.classList.toggle("active", index === activeIndex);
+      });
+    }
+
+    function jumpToChapter(index) {
+      if (!narrationAudio) return;
+      const chapter = audioChapters[index];
+      narrationAudio.currentTime = chapter.time;
+      narrationAudio.play().catch(() => {});
+      updatePlayState();
+      if (chapter.section) {
+        const target = document.querySelector(chapter.section);
+        if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    }
+
+    function toggleChapters() {
+      if (!chaptersEl) return;
+      chaptersEl.classList.toggle("open");
+      chToggleText.textContent = chaptersEl.classList.contains("open") ? "▴ Hide Sections" : "▾ Show All Sections";
+    }
+
+    function toggleMinimize() {
+      if (!audioPlayer) return;
+      audioPlayer.classList.toggle("minimized");
+    }
+
+    function updatePlayState() {
+      if (!narrationAudio || !playIcon || !pauseIcon) return;
+      const playing = !narrationAudio.paused;
+      playIcon.style.display = playing ? "none" : "block";
+      pauseIcon.style.display = playing ? "block" : "none";
+    }
+
+    function togglePlay() {
+      if (!narrationAudio) return;
+      if (narrationAudio.paused) narrationAudio.play().catch(() => {});
+      else narrationAudio.pause();
+      updatePlayState();
+    }
+
+    function seekAudio(event) {
+      if (!narrationAudio || !narrationAudio.duration) return;
+      const rect = event.currentTarget.getBoundingClientRect();
+      narrationAudio.currentTime = ((event.clientX - rect.left) / rect.width) * narrationAudio.duration;
+    }
+
+    function startWalkthroughAudio() {
+      if (!audioPlayer || !narrationAudio) return;
+      audioPlayer.classList.add("visible");
+      narrationAudio.currentTime = 0;
+      narrationAudio.play().then(updatePlayState).catch(updatePlayState);
+    }
+
+    if (narrationAudio) {
+      narrationAudio.addEventListener("loadedmetadata", () => { durationEl.textContent = formatTime(narrationAudio.duration); });
+      narrationAudio.addEventListener("timeupdate", () => {
+        currentTimeEl.textContent = formatTime(narrationAudio.currentTime);
+        durationEl.textContent = formatTime(narrationAudio.duration);
+        progressFill.style.width = narrationAudio.duration ? `${(narrationAudio.currentTime / narrationAudio.duration) * 100}%` : "0%";
+        updateActiveChapter();
+      });
+      narrationAudio.addEventListener("play", updatePlayState);
+      narrationAudio.addEventListener("pause", updatePlayState);
+      narrationAudio.addEventListener("ended", updatePlayState);
+    }
+
+    initChapters();
+    window.startWalkthroughAudio = startWalkthroughAudio;
+    window.togglePlay = togglePlay;
+    window.seekAudio = seekAudio;
+    window.toggleChapters = toggleChapters;
+    window.toggleMinimize = toggleMinimize;
+    window.jumpToChapter = jumpToChapter;
   </script>
 
 </body>
